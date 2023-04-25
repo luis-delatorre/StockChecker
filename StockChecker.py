@@ -1,5 +1,13 @@
+import os
 import argparse
 import requests
+from dotenv import load_dotenv
+
+
+load_dotenv()
+API_KEY = os.environ['API_KEY']
+API_HOST = os.environ['API_HOST']
+CONTENT = "application/octet-stream"
 
 
 class StockChecker:
@@ -8,9 +16,9 @@ class StockChecker:
         self.symbol = sym
         self.url = "https://realstonks.p.rapidapi.com/"
         self.headers = {
-            "content-type": "application/octet-stream",
-            "X-RapidAPI-Key": "671b263a45msh6b7e5cc39c3576fp1d6d83jsn2c617f09a26c",
-            "X-RapidAPI-Host": "realstonks.p.rapidapi.com"
+            "content-type": CONTENT,
+            "X-RapidAPI-Key": API_KEY,
+            "X-RapidAPI-Host": API_HOST
         }
         self.response = None
 
@@ -26,16 +34,11 @@ class StockChecker:
     def get_headers(self):
         return self.headers
 
-    def set_headers(
-            self,
-            content="application/octet-stream",
-            api_key="671b263a45msh6b7e5cc39c3576fp1d6d83jsn2c617f09a26c",
-            api_host="realstonks.p.rapidapi.com"
-    ):
+    def set_headers(self, cont, key, host):
         self.headers = {
-            "content-type": content,
-            "X-RapidAPI-Key": api_key,
-            "X-RapidAPI-Host": api_host
+            "content-type": cont,
+            "X-RapidAPI-Key": key,
+            "X-RapidAPI-Host": host
         }
 
     def get_response(self):
@@ -69,3 +72,6 @@ if __name__ == '__main__':
     a.set_symbol('TSLA')
     a.get_stock_info()
     a.print_stock_info()
+
+    print('api_key: {}'.format(a.api_key))
+    print('api_host: {}'.format(a.api_host))

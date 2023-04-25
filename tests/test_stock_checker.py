@@ -1,5 +1,13 @@
+import os
 import pytest
+from dotenv import load_dotenv
 from StockChecker import StockChecker
+
+
+load_dotenv()
+API_KEY = os.environ['API_KEY']
+API_HOST = os.environ['API_HOST']
+CONTENT = "application/octet-stream"
 
 
 @pytest.fixture
@@ -26,6 +34,6 @@ def test_call_fails_with_no_symbol(req):
 
 
 def test_call_fails_bad_api_key(req):
-    req.set_headers(api_key="abc123")
+    req.set_headers(cont=CONTENT, key='abc123', host=API_HOST)
     req.get_stock_info()
     assert req.get_response().status_code == 403
