@@ -1,1 +1,2 @@
 # StockChecker
+This programs makes use of the [RealStonks API](https://rapidapi.com/amansharma2910/api/realstonks/) available on the [RapidAPI](https://rapidapi.com/hub) website to fetch stock information.
