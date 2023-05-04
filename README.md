@@ -12,17 +12,23 @@ This Python program makes use of the [RealStonks API][RealStonksAPI] available o
 **Pyenv**
 * Install Pyenv on your machine, [github.com/pyenv-win/pyenv-win](https://github.com/pyenv-win/pyenv-win).
 * Use Pyenv to install Python version 3.11.1.
-  > pyenv install 3.11.1
+  ```
+  pyenv install 3.11.1
+  ```
 
 **Pipenv**
 * Install Pipenv on your machine, [pipenv.pypa.io/en/latest](https://pipenv.pypa.io/en/latest/#install-pipenv-today).
 
 **StockChecker**
 * Clone this repo onto your machine.
-  > git clone git@github.com:luis-delatorre/StockChecker.git
+  ```
+  git clone git@github.com:luis-delatorre/StockChecker.git
+  ```
 * Navigate into the StockChecker directory.
 * Use Pyenv to set Python 3.11.1 as your local python version.
-  > pyenv local 3.11.1
+  ```
+  pyenv local 3.11.1
+  ```
 * Use Pipenv to create a virtual environment with the compatible Python version.
   ```
   pipenv --python 3.11.1
@@ -39,17 +45,21 @@ This Python program makes use of the [RealStonks API][RealStonksAPI] available o
 **Environment Variables**
 * In the project's root directory, create a `.env` file.
 * Enter the following variables into the file.  Replace values with data from RapidAPI.
-```
-API_KEY=<replace_with_rapid_api_key>
-API_HOST=<replace_with_rapid_api_host>
-```  
+  ```
+  API_KEY=<replace_with_rapid_api_key>
+  API_HOST=<replace_with_rapid_api_host>
+  ```  
 
 # Execute
 **Run Program**
-> pipenv run python StockChecker.py AAPL
+```
+pipenv run python StockChecker.py AAPL
+```
 
 **Run Tests**
-> pipenv run python -m pytest tests/
+```
+pipenv run python -m pytest tests/
+```
 
 <!-- Reference Links --> 
 [RapidAPI]: https://rapidapi.com/hub
