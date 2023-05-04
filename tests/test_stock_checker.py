@@ -11,29 +11,25 @@ CONTENT = "application/octet-stream"
 
 
 @pytest.fixture
-def req():
+def obj():
     return StockChecker('IAS')
 
 
-def test_successful_call(req):
-    req.get_stock_info()
-    assert req.get_response().status_code == 200
+def test_successful_call(obj):
+    assert obj.get_stock_info().status_code == 200
 
 
-def test_expected_fields_are_present(req):
-    req.get_stock_info()
+def test_expected_response_fields_are_present(obj):
     fields = ['price', 'change_point', 'change_percentage', 'total_vol']
     for i in fields:
-        assert i in req.get_response().json()
+        assert i in obj.get_stock_info().json()
 
 
-def test_call_fails_with_no_symbol(req):
-    req.set_symbol('')
-    req.get_stock_info()
-    assert req.get_response().status_code == 404
+def test_call_fails_with_no_symbol(obj):
+    obj.set_symbol('')
+    assert obj.get_stock_info().status_code == 404
 
 
-def test_call_fails_bad_api_key(req):
-    req.set_headers(cont=CONTENT, key='abc123', host=API_HOST)
-    req.get_stock_info()
-    assert req.get_response().status_code == 403
+def test_call_fails_with_bad_api_key(obj):
+    obj.set_headers(cont=CONTENT, key='abc123', host=API_HOST)
+    assert obj.get_stock_info().status_code == 403

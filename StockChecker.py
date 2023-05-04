@@ -20,7 +20,6 @@ class StockChecker:
             "X-RapidAPI-Key": API_KEY,
             "X-RapidAPI-Host": API_HOST
         }
-        self.response = None
 
     def get_symbol(self):
         return self.symbol
@@ -41,18 +40,12 @@ class StockChecker:
             "X-RapidAPI-Host": host
         }
 
-    def get_response(self):
-        return self.response
-
-    def set_response(self, resp):
-        self.response = resp
-
     def get_stock_info(self):
         response = requests.get(self.get_url(), headers=self.get_headers())
-        self.set_response(response)
+        return response
 
     def print_stock_info(self):
-        resp_json = self.get_response().json()
+        resp_json = self.get_stock_info().json()
         print("{}: {}".format(self.get_symbol(), resp_json))
 
 
@@ -61,17 +54,18 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Sends requests to a Finance Rest API to get stock information on the specified ticker.'
     )
-    parser.add_argument('symbol', metavar='s', type=str, help='Name of stock symbol.')
+    parser.add_argument('symbol', metavar='Symbol', type=str, help='Name of stock symbol.')
     args = parser.parse_args()
-    ticker = args.symbol
 
-    a = StockChecker(sym=ticker)
-    a.get_stock_info()
-    a.print_stock_info()
+    stk = StockChecker(sym=args.symbol)
+    stk.print_stock_info()
 
-    a.set_symbol('TSLA')
-    a.get_stock_info()
-    a.print_stock_info()
+    while True:
+        symbol_input = input("Enter symbol [or press ENTER to quit]: ")
+        if symbol_input == "":
+            break
+        else:
+            print("Checking data for {}.".format(symbol_input))
 
-    print('api_key: {}'.format(a.api_key))
-    print('api_host: {}'.format(a.api_host))
+            stk.set_symbol(symbol_input)
+            stk.print_stock_info()
