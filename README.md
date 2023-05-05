@@ -3,9 +3,9 @@
 This Python program makes use of the [RealStonks API][RealStonksAPI] available on the [RapidAPI][RapidAPI] website to fetch information on specified NASDAQ stock symbols.  It was built and tested on Python version 3.11.1.
 
 # Table of Contents
-* Installation
-* Setup
-* Execute
+* [Installation](#installation)
+* [Setup](#setup)
+* [Execute](#execute)
 
 # Installation
 
@@ -25,30 +25,31 @@ This Python program makes use of the [RealStonks API][RealStonksAPI] available o
   git clone git@github.com:luis-delatorre/StockChecker.git
   ```
 * Navigate into the StockChecker directory.
-* Use Pyenv to set Python 3.11.1 as your local python version.
+
+* Use Pipenv to create a virtual environment and install required packages.
   ```
-  pyenv local 3.11.1
-  ```
-* Use Pipenv to create a virtual environment with the compatible Python version.
-  ```
-  pipenv --python 3.11.1
   pipenv install --skip-lock --dev
   ```
+  * **Note:** If the required Python version does not exist on your machine, Pipenv will use Pyenv to install it.  It will prompt  you first.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 # Setup
 **RapidAPI Account**
 * To use APIs from the [RapidAPI][RapidAPI] site, you need to have an account setup with them.  Their service is free to use.
 * After you have an account with them, search for and subscribe to the [RealStonks API][RealStonksAPI].
-  * This will provide you with a `X-RapidAPI-Key`.
+  * This will provide you with an `X-RapidAPI-Host` and `X-RapidAPI-Key`.
 
 **Environment Variables**
 * In the project's root directory, create a `.env` file.
 * Enter the following variables into the file.  Replace values with data from RapidAPI.
   ```
+  API_HOST=realstonks.p.rapidapi.com
   API_KEY=<replace_with_rapid_api_key>
-  API_HOST=<replace_with_rapid_api_host>
-  ```  
+  ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 # Execute
 **Run Program**
@@ -58,10 +59,11 @@ pipenv run python StockChecker.py AAPL
 
 **Run Tests**
 ```
-pipenv run python -m pytest tests/
+pipenv run python -m pytest -rA tests/
 ```
 
 <!-- Reference Links --> 
 [RapidAPI]: https://rapidapi.com/hub
 [RealStonksAPI]: https://rapidapi.com/amansharma2910/api/realstonks/
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
