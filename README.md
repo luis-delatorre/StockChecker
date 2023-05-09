@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 # StockChecker
-This Python program makes use of the [RealStonks API][RealStonksAPI] available on the [RapidAPI][RapidAPI] website to fetch information on specified NASDAQ stock symbols.  It was built and tested on Python version 3.11.1.
+This Python program makes use of the [RealStonks API][RealStonksAPI] available on the [RapidAPI][RapidAPI] website to fetch stock information on specified NASDAQ symbols.  It was built and tested on Python version 3.11.1.
 
 # Table of Contents
 * [Installation](#installation)

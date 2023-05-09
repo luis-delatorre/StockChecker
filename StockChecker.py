@@ -2,11 +2,12 @@ import os
 import argparse
 import requests
 from dotenv import load_dotenv
+from urllib.parse import urljoin
 
 
 load_dotenv()
-API_KEY = os.environ['API_KEY']
 API_HOST = os.environ['API_HOST']
+API_KEY = os.environ['API_KEY']
 CONTENT = "application/octet-stream"
 
 
@@ -17,8 +18,8 @@ class StockChecker:
         self.url = "https://realstonks.p.rapidapi.com/"
         self.headers = {
             "content-type": CONTENT,
-            "X-RapidAPI-Key": API_KEY,
-            "X-RapidAPI-Host": API_HOST
+            "X-RapidAPI-Host": API_HOST,
+            "X-RapidAPI-Key": API_KEY
         }
 
     def get_symbol(self):
@@ -28,16 +29,17 @@ class StockChecker:
         self.symbol = sym
 
     def get_url(self):
-        return self.url + self.get_symbol()
+        url = urljoin(self.url, self.get_symbol())
+        return url
 
     def get_headers(self):
         return self.headers
 
-    def set_headers(self, cont, key, host):
+    def set_headers(self, cont, host, key):
         self.headers = {
             "content-type": cont,
-            "X-RapidAPI-Key": key,
-            "X-RapidAPI-Host": host
+            "X-RapidAPI-Host": host,
+            "X-RapidAPI-Key": key
         }
 
     def get_stock_info(self):
@@ -58,6 +60,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     stk = StockChecker(sym=args.symbol)
+    print("Checking data for {}.".format(args.symbol))
     stk.print_stock_info()
 
     while True:
